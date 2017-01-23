@@ -1,0 +1,15 @@
+---
+- name: update apt cache
+  raw: sudo apt-get update
+  tags:
+  - skip_ansible_lint
+
+- name: install python
+  raw: sudo apt-get -y install python2.7
+  tags:
+  - skip_ansible_lint
+
+- name: make python2.7 a python alternative
+  raw: sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 10
+  tags:
+  - skip_ansible_lint

@@ -1,0 +1,55 @@
+---
+- name: create manage group
+  group:
+    name: "{{ bastion.manage_group }}"
+    state: present
+
+- name: create manage user
+  user:
+    name: "{{ bastion.manage_user }}"
+    group: "{{ bastion.manage_group }}"
+    state: present
+
+- name: update system packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+    force: yes
+
+- name: install apt packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{ packages.apt }}"
+
+- name: upgrade pip
+  pip:
+    name: pip
+    state: forcereinstall
+
+- name: install python modules
+  pip:
+    name: '{{ item }}'
+  with_items: '{{ packages.pip }}'
+
+- name: install ruby gems
+  gem:
+    name: '{{ item }}'
+  with_items: '{{ packages.gem }}'
+
+- name: create the ansible code directory
+  file:
+    path: "{{ bastion.ansible_path }}"
+    state: directory
+    owner: "{{ bastion.manage_user }}"
+    group: "{{ bastion.manage_group }}"
+
+- name: check out the ansible code
+  git:
+    repo: "{{ bastion.ansible_repo }}"
+    version: "{{ bastion.ansible_version }}"
+    dest: "{{ bastion.ansible_path }}"
+    accept_hostkey: true
+  become: yes
+  become_user: "{{ bastion.manage_user }}"

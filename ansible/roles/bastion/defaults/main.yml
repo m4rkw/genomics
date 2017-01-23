@@ -1,0 +1,5 @@
+---
+bastion:
+  manage_user: manage
+  manage_group: manage
+  ansible_path: /home/manage/ansible

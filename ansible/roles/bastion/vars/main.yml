@@ -1,0 +1,30 @@
+---
+packages:
+  apt:
+    - git-core
+    - ruby
+    - ruby-dev
+    - python-pip
+    - python-dev
+    - iotop
+    - htop
+    - build-essential
+    - libssl-dev
+    - vim
+  pip:
+    - distribute
+    - python-consul
+    - boto
+    - boto3
+    - jinja2
+    - paramiko
+    - PyYAML
+    - awscli
+    - ansible
+    - molecule
+    - ansible-vagrant
+    - docker-py
+    - pywinrm
+  gem:
+    - serverspec
+    - docker-api

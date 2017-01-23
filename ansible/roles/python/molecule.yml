@@ -1,0 +1,30 @@
+---
+molecule:
+  test:
+    sequence:
+      - destroy
+      - syntax
+      - create
+      - converge
+      - verify
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+# Can't use docker for this because the ubuntu come with python
+vagrant:
+  platforms:
+    - name: xenial
+      box: ubuntu/xenial64
+  providers:
+    - name: virtualbox
+      type: virtualbox
+      options:
+        memory: 512
+        cpus: 2
+  instances:
+    - name: python
+      ansible_groups:
+        - group1
+verifier:
+  name: serverspec
