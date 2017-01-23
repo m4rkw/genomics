@@ -1,5 +1,5 @@
 ---
-- name: install apt repositories
+- name: install apt repository
   apt_repository:
     repo: ppa:webupd8team/java
     state: present
