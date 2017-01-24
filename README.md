@@ -33,6 +33,29 @@ $ vagrant up
 ````
 
 
+Querying users in a group
+-------------------------
+
+Log into the bastion host:
+
+````
+$ cd vagrant/bastion
+$ vagrant ssh
+````
+
+Then run the ldap_search.py script:
+
+````
+$ cd genomics/utils
+$ ./ldap_search admin
+````
+
+It seems that the supplied ldif data file does not fully import into openjd 3.0.
+There are no errors reported when it gets imported by the setup script, but
+verification with ldapsearch and JXplorer shows that only the admin group was
+imported.
+
+
 Running the molecule tests
 --------------------------
 
