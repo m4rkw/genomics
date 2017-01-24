@@ -1,0 +1,15 @@
+---
+packages:
+  apt:
+    - apt-transport-https
+    - ca-certificates
+    - software-properties-common
+    - language-pack-en
+    - vim
+    - wget
+    - curl
+    - telnet
+    - net-tools
+    - inetutils-ping
+    - git-core
+    - openssl

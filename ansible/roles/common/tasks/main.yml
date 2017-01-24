@@ -1,0 +1,23 @@
+---
+- name: enable apt multiverse
+  apt_repository:
+    repo: "{{ item }}"
+    update_cache: no
+  with_items:
+    - "deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} multiverse"
+    - "deb-src http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} multiverse"
+    - "deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }}-updates multiverse"
+    - "deb-src http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }}-updates multiverse"
+
+- name: update system packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+    force: yes
+
+- name: install apt packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{ packages.apt }}"
