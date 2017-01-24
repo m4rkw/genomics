@@ -11,6 +11,7 @@ packages:
     - build-essential
     - libssl-dev
     - vim
+    - python-ldap
   pip:
     - distribute
     - python-consul
