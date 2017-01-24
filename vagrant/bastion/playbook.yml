@@ -6,11 +6,12 @@
 
 - hosts: all
   roles:
+    - role: common
     - role: bastion
       bastion:
         manage_user: ubuntu
         manage_group: ubuntu
         ansible_repo: https://github.com/m4rkw/genomics
-        ansible_path: /home/ubuntu/ansible
+        ansible_path: /home/ubuntu/genomics
         ansible_version: master
   become: yes
