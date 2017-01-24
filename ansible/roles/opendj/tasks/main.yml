@@ -1,0 +1,46 @@
+---
+- name: download and verify the opendj .deb package
+  get_url:
+    url: "{{ opendj_deb }}"
+    dest: /root/opendj.deb
+    checksum: "md5:{{ opendj_deb_md5 }}"
+    force: yes
+
+- name: install opendj .deb package
+  apt:
+    deb: /root/opendj.deb
+    state: present
+
+- name: copy ldif file if configured
+  copy:
+    src: "{{ opendj_ldif_file }}"
+    dest: /root/data.ldif
+  when: opendj_ldif_file != false
+
+- name: install opendj properties file
+  template:
+    src: templates/opendj.properties.j2
+    dest: /tmp/opendj.properties
+
+- name: configure opendj using the properties file
+  command:
+    /opt/opendj/setup --cli --acceptLicense -n --propertiesFilePath /tmp/opendj.properties
+  tags:
+    - skip_ansible_lint
+
+- name: remove the properties file
+  file:
+    path: /tmp/opendj.properties
+    state: absent
+
+- name: remove the ldif data seed
+  file:
+    path: /root/data.ldif
+    state: absent
+  when: opendj_ldif_file != false
+
+- name: enable and start the opendj service
+  service:
+    name: opendj
+    enabled: yes
+    state: started

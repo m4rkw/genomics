@@ -1,0 +1,8 @@
+---
+opendj_ldap_port: 389
+opendj_ldaps_port: 636
+opendj_jmx_port: 1689
+opendj_admin_port: 4444
+opendj_root_pass: admin
+opendj_base_dn: dc=example,dc=com
+opendj_ldif_file:

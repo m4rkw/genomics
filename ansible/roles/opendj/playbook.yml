@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - role: python
+    - role: common
+    - role: oracle-java8
+    - role: opendj
+      opendj_ldif_file: files/testdata.ldif

@@ -1,0 +1,22 @@
+---
+molecule:
+  test:
+    sequence:
+      - destroy
+      - syntax
+      - create
+      - converge
+      - verify
+dependency:
+  name: galaxy
+driver:
+  name: docker
+docker:
+  containers:
+    - name: opendj
+      image: ubuntu
+      image_version: 16.04
+      ansible_groups:
+        - group1
+verifier:
+  name: serverspec

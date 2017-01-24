@@ -1,0 +1,19 @@
+#
+# Sample properties file to set up OpenDJ directory server
+#
+hostname                        = localhost
+ldapPort                        = {{ opendj_ldap_port }}
+generateSelfSignedCertificate   = true
+enableStartTLS                  = true
+ldapsPort                       = {{ opendj_ldaps_port }}
+jmxPort                         = {{ opendj_jmx_port }}
+adminConnectorPort              = {{ opendj_admin_port }}
+rootUserDN                      = cn=Directory Manager
+rootUserPassword                = {{ opendj_root_pass }}
+baseDN                          = {{ opendj_base_dn }}
+{% if opendj_ldif_file is defined %}
+ldifFile                        = /root/data.ldif
+{% endif %}
+{% if opendj_sample_data is defined %}
+sampleData                      = {{ opendj_sample_data }}
+{% endif %}
